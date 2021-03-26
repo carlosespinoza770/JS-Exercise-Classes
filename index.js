@@ -42,8 +42,30 @@ class Airplane {
   */
   
  class Person {
-    
-  }
+  constructor(n, a){
+  this.n = n;
+  this.a = a;
+  this.stomach = []
+}
+
+ eat(edible){
+ if (this.stomach.length < 10){
+   this.stomach.push(edible);
+ }
+}
+
+ poop(){
+   this.stomach = [];
+ }
+ 
+
+toString(){
+  return `${this.n} , ${this.a}`
+}
+
+}
+
+
   
   /*
     TASK 2
@@ -60,8 +82,37 @@ class Airplane {
   */
   
  class Car {
-    
-  }
+  constructor(model, milesPerGallon){
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0
+  this.odometer = 0 
+}
+
+fill (gallons){
+  this.tank += gallons
+}
+
+drive (distance){
+  
+  const drivableDistance = this.tank * this.milesPerGallon
+  
+  if (this.tank >= (distance/this.milesPerGallon)){
+   this.odometer += distance
+   this.tank -= distance/this.milesPerGallon
+   }
+   
+   else {
+     this.odometer += drivableDistance
+     this.tank -= drivableDistance/this.milesPerGallon
+     return `I ran out of fuel at ${this.odometer} miles!`
+
+   }
+
+ }
+
+}
+
   
   /*
     TASK 3
@@ -76,8 +127,15 @@ class Airplane {
           + {name} and {location} of course come from the instance's own properties.
   */
  class Lambdasian {
-    
-  }
+  constructor(attrs){
+    this.n = attrs.n;
+    this.a = attrs.a;
+    this.location = attrs.location;
+     }
+   speak(){
+     return `Hello my name is ${this.n}, I am from ${this.location}`
+   }
+ }
   
   /*
     TASK 4
@@ -93,9 +151,26 @@ class Airplane {
           + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
           + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
   */
- class Instructor {
+ class Instructor extends Lambdasian {
+  constructor(attrs){
+    super(attrs)
+    this.specialty = attrs.specialty;
+    this.favLanguage = attrs.favLanguage;
+    this.catchPhrase = attrs.catchPhrase;
+  } 
 
- }
+  demo(subject){
+    return `Today we are learning about ${subject}`
+
+  }
+
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}`
+
+  }
+ 
+
+}
   /*
     TASK 5
       - Write a Student class extending Lambdasian.
